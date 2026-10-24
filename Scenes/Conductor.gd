@@ -1,22 +1,17 @@
 extends AudioStreamPlayer
 
 @export var bpm: int = 100
-@export var measures: int = 4
 
 var song_position = 0.0
 var song_position_in_beats = 0
 var sec_per_beat = 60.0/bpm
 var last_reported_beat = 0
 var beats_before_start = 0
-var measure = 1
 
 var closest = 0
 var time_off_beat = 0.0
 
-@warning_ignore("unused_signal")
 signal on_beat(position: float)
-@warning_ignore("unused_signal")
-signal on_measure(position)
 
 @onready var start_timer: Timer = $StartTimer
 
@@ -33,12 +28,8 @@ func _physics_process(delta: float) -> void:
 
 func report_beat():
 	if last_reported_beat < song_position_in_beats:
-		if measure > measures:
-			measure = 1
 		on_beat.emit(song_position_in_beats)
-		on_measure.emit(measure)
 		last_reported_beat = song_position_in_beats
-		measure += 1
 
 func play_with_beat_offset(num):
 	beats_before_start = num
@@ -54,7 +45,6 @@ func play_from_beat(beat, offset):
 	play()
 	seek(beat * 4 * sec_per_beat)
 	beats_before_start = offset
-	measure = beat % measures
 
 func _on_start_timer_timeout():
 	song_position_in_beats += 1

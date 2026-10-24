@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-SonkLinksGraph="*uid://bnj6umel4nijs"
+SongLinksGraph="*uid://bnj6umel4nijs"
 
 [display]
 

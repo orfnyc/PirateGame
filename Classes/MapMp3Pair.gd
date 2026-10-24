@@ -1,9 +1,14 @@
 class_name MapMp3Pair
 extends Object
 
-var mp3: Resource
-var map: Resource
+var mp3: AudioStreamMP3
+var map: Dictionary[float, int]
 	
 func _init(mp3_path: String, map_path: String) -> void:
 	mp3 = load(mp3_path)
-	map = load(map_path)
+	if not FileAccess.file_exists(map_path):
+		return
+	var file = FileAccess.open(map_path, FileAccess.READ)
+	while file.get_position() < file.get_length():
+		var line = file.get_line().split(" ")
+		map[float(line[0])] = int(line[1])
