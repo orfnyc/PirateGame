@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cdsl7fyqpk3t0"]
 
 [ext_resource type="Script" uid="uid://cacc63xt0y3lk" path="res://Scenes/CombatScene.gd" id="1_2mqg5"]
-[ext_resource type="AudioStream" uid="uid://bvbnyav2kpyhn" path="res://Assets/Songs/Leave-Her-Johnny.mp3" id="3_sygbj"]
+[ext_resource type="AudioStream" uid="uid://o8ijkenfua1s" path="res://Assets/Songs/Connector-1.mp3" id="3_sygbj"]
 [ext_resource type="PackedScene" uid="uid://2g3a30yucngk" path="res://Scenes/Conductor.tscn" id="4_eel7g"]
 
 [node name="CombatScene" type="Node2D" unique_id=946611104]

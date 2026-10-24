@@ -35,7 +35,7 @@ var notes_data: Dictionary[float, int] = {}
 func _ready() -> void:
 	# generate song from clip graph
 	# collect notes from song into array
-	load_text_file("res://Assets/MapFiles/Leave-Her-Johnny.txt")
+	load_text_file("res://Assets/MapFiles/Connector-1.txt")
 	conductor.play_with_beat_offset(0)
 
 #func build_playlist() -> void:

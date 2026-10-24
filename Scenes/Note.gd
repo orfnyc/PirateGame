@@ -26,7 +26,7 @@ func init_note(pos: Vector2, inp: String) -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	if size <= 2:
-		#print("total miss")
+		print("total miss")
 		queue_free()
 	if size >= 35 and size <= 45:
 		status = "perfect"
