@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://2g3a30yucngk"]
+
+[ext_resource type="Script" uid="uid://ct7va25403mi1" path="res://Scenes/Conductor.gd" id="1_5rtww"]
+
+[node name="Conductor" type="AudioStreamPlayer" unique_id=697223448]
+script = ExtResource("1_5rtww")
+
+[node name="StartTimer" type="Timer" parent="." unique_id=1373088774]

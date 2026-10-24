@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://cdsl7fyqpk3t0"]
+
+[ext_resource type="Script" uid="uid://cacc63xt0y3lk" path="res://Scenes/CombatScene.gd" id="1_2mqg5"]
+[ext_resource type="AudioStream" uid="uid://cl3e0h5wv84uf" path="res://Assets/Songs/sample-12s.mp3" id="2_dqj0d"]
+[ext_resource type="Texture2D" uid="uid://2c2c5dqewyi" path="res://icon.svg" id="2_sygbj"]
+[ext_resource type="PackedScene" uid="uid://2g3a30yucngk" path="res://Scenes/Conductor.tscn" id="4_eel7g"]
+
+[sub_resource type="Animation" id="Animation_dqj0d"]
+resource_name = "SampleSong"
+length = 3.0000000000000004
+step = 0.1875
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer2D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("2_dqj0d")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.6, 1, 1.4, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": ["A", 4],
+"method": &"note"
+}, {
+"args": ["A", 3],
+"method": &"note"
+}, {
+"args": ["A", 2],
+"method": &"note"
+}, {
+"args": ["A", 1],
+"method": &"note"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sygbj"]
+_data = {
+&"SampleSong": SubResource("Animation_dqj0d")
+}
+
+[node name="CombatScene" type="Node2D" unique_id=946611104]
+script = ExtResource("1_2mqg5")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=467654259]
+visible = false
+
+[node name="0" type="Sprite2D" parent="." unique_id=1792700778]
+position = Vector2(123, 361)
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("2_sygbj")
+
+[node name="1" type="Sprite2D" parent="." unique_id=92335149]
+position = Vector2(263, 220)
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("2_sygbj")
+
+[node name="2" type="Sprite2D" parent="." unique_id=730960733]
+position = Vector2(401, 193)
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("2_sygbj")
+
+[node name="3" type="Sprite2D" parent="." unique_id=1684661238]
+position = Vector2(540, 222)
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("2_sygbj")
+
+[node name="4" type="Sprite2D" parent="." unique_id=45834145]
+position = Vector2(685, 356)
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("2_sygbj")
+
+[node name="SongData" type="AnimationPlayer" parent="." unique_id=1292401550]
+libraries/ = SubResource("AnimationLibrary_sygbj")
+autoplay = &"SampleSong"
+
+[node name="NotesFolder" type="Node" parent="." unique_id=1356039001]
+
+[node name="Conductor" parent="." unique_id=697223448 instance=ExtResource("4_eel7g")]
+
+[connection signal="on_beat" from="Conductor" to="." method="_on_conductor_beat"]
