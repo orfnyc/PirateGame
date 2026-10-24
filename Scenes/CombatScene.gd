@@ -6,26 +6,26 @@ const NOTE = preload("uid://djord860u55gt")
 @onready var notes_folder: Node = $NotesFolder
 @onready var conductor: AudioStreamPlayer = $Conductor
 @onready var buttons: Dictionary[int, Node2D] = {
-	1: $ButtonsFolder/Middle,
-	2: $ButtonsFolder/Top,
-	3: $ButtonsFolder/Left,
-	4: $ButtonsFolder/Right,
+	2: $ButtonsFolder/Middle,
+	4: $ButtonsFolder/Top,
+	1: $ButtonsFolder/Left,
+	3: $ButtonsFolder/Right,
 	5: $ButtonsFolder/Bottom
 }
 
 @onready var notes_folders: Dictionary[int, Node] = {
-	1: $NotesFolder/Middle,
-	2: $NotesFolder/Top,
-	3: $NotesFolder/Left,
-	4: $NotesFolder/Right,
+	2: $NotesFolder/Middle,
+	4: $NotesFolder/Top,
+	1: $NotesFolder/Left,
+	3: $NotesFolder/Right,
 	5: $NotesFolder/Bottom
 }
 
 var inputs: Dictionary[int, String] = {
-	1: 'S',
-	2: 'W',
-	3: 'A',
-	4: 'D',
+	1: 'A',
+	2: 'S',
+	3: 'D',
+	4: 'W',
 	5: 'space'
 }
 
@@ -43,8 +43,7 @@ func _ready() -> void:
 
 func build_playlist() -> void:
 	var songs_array: Array[MapMp3Pair] = [SongLinksGraph.SONGS["Drunken-Sailor"],
-										 SongLinksGraph.SONGS["Leave-Her"],
-										SongLinksGraph.SONGS["Drunken-Sailor"]]
+											SongLinksGraph.SONGS["Leave-Her"]]
 	var playlist := AudioStreamPlaylist.new()
 	playlist.stream_count = songs_array.size()
 	playlist.fade_time = 0
@@ -54,7 +53,7 @@ func build_playlist() -> void:
 		playlist.set_list_stream(i, songs_array[i].mp3)
 		for key in songs_array[i].map:
 			notes_data[key + beats_count] = songs_array[i].map[key]
-		beats_count += songs_array[i].num_beats + 1
+		beats_count += songs_array[i].num_beats
 	conductor.stream = playlist
 	
 
