@@ -30,33 +30,41 @@ var inputs: Dictionary[int, String] = {
 }
 
 var score: int = 0
-
+var playlist_array: Array[AudioStreamMP3] = []
+var playlist_index: int = 0
 var notes_data: Dictionary[float, int] = {}
 
 func _ready() -> void:
 	# generate song from clip graph
 	# collect notes from song into array
-	load_text_file("res://Assets/MapFiles/Leave-Her-Johnny.txt")
 	build_playlist()
 	conductor.play()
-	#conductor.play_with_beat_offset(0)
+
 
 func build_playlist() -> void:
+	var songs_array: Array[MapMp3Pair] = [SongLinksGraph.SONGS["Drunken-Sailor"],
+										 SongLinksGraph.SONGS["Leave-Her"],
+										SongLinksGraph.SONGS["Drunken-Sailor"]]
 	var playlist := AudioStreamPlaylist.new()
-	playlist.stream_count = 2
-	playlist.fade_time = 0.3
+	playlist.stream_count = songs_array.size()
+	playlist.fade_time = 0
 	playlist.loop = false
-	playlist.set_list_stream(0, SongLinksGraph.SONGS["Drunken-Sailor"].mp3)
-	playlist.set_list_stream(1, SongLinksGraph.SONGS["Leave-Her"].mp3)
+	var beats_count = 0
+	for i in range(songs_array.size()):
+		playlist.set_list_stream(i, songs_array[i].mp3)
+		for key in songs_array[i].map:
+			notes_data[key + beats_count] = songs_array[i].map[key]
+		beats_count += songs_array[i].num_beats + 1
 	conductor.stream = playlist
+	
 
-func load_text_file(file_path: String):
-	if not FileAccess.file_exists(file_path):
-		return
-	var file = FileAccess.open(file_path, FileAccess.READ)
-	while file.get_position() < file.get_length():
-		var line = file.get_line().split(" ")
-		notes_data[float(line[0])] = int(line[1])
+#func load_text_file(file_path: String):
+	#if not FileAccess.file_exists(file_path):
+		#return
+	#var file = FileAccess.open(file_path, FileAccess.READ)
+	#while file.get_position() < file.get_length():
+		#var line = file.get_line().split(" ")
+		#notes_data[float(line[0])] = int(line[1])
 
 func increment_score(val: int):
 	score += val
