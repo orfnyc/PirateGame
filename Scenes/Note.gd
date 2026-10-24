@@ -13,12 +13,13 @@ signal increment_score(amount: int)
 func _ready() -> void:
 	pass # Replace with function body.
 
-func init_note(pos: Vector2, key: String) -> void:
+func init_note(pos: Vector2) -> void:
 	position = pos
-	size = 85
-	input = key
+	size = 120
+	modulate = Color("#ffffff00")
 	var tween: Tween = create_tween()
-	tween.tween_property(self, "size", 40, 0.5)
+	tween.tween_property(self, "size", 40, 1)
+	tween.parallel().tween_property(self, "modulate", Color("#FFFFFFFF"), 1)
 	tween.tween_property(self, "size", 0, 0.5)
 
 
@@ -26,6 +27,7 @@ func init_note(pos: Vector2, key: String) -> void:
 func _process(_delta: float) -> void:
 	if size <= 2:
 		increment_score.emit(-1)
+		print("total miss")
 		queue_free()
 	if size >= 35 and size <= 45:
 		status = "perfect"
@@ -38,9 +40,9 @@ func _process(_delta: float) -> void:
 	queue_redraw()
 
 func _unhandled_input(event):
-	if event.is_action(input):
-		if event.is_action_pressed(input, false):
-			if (position.distance_to(get_local_mouse_position()) <= size):
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
+			if (position.distance_to(get_global_mouse_position()) <= 40):
 				if status == "perfect":
 					increment_score.emit(3)
 					print(status)
@@ -53,8 +55,7 @@ func _unhandled_input(event):
 				else:
 					increment_score.emit(-1)
 					print(status)
-			else:
-				print("miss")
+				queue_free()
 
 func _draw() -> void:
 	draw_circle(Vector2.ZERO, size, Color("FF1447"))

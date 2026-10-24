@@ -3,8 +3,5 @@
 [ext_resource type="Script" uid="uid://iab553db5d0a" path="res://Scenes/Note.gd" id="1_1eugu"]
 
 [node name="Note" type="Node2D" unique_id=904582845]
+modulate = Color(1, 1, 1, 0)
 script = ExtResource("1_1eugu")
-
-[node name="KeyID" type="Label" parent="." unique_id=111951787]
-offset_right = 40.0
-offset_bottom = 23.0

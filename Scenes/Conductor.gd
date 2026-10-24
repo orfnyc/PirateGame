@@ -4,7 +4,7 @@ extends AudioStreamPlayer
 @export var measures: int = 4
 
 var song_position = 0.0
-var song_position_in_beats = 1
+var song_position_in_beats = 0
 var sec_per_beat = 60.0/bpm
 var last_reported_beat = 0
 var beats_before_start = 0
@@ -14,16 +14,15 @@ var closest = 0
 var time_off_beat = 0.0
 
 @warning_ignore("unused_signal")
-signal on_beat(position)
+signal on_beat(position: float)
 @warning_ignore("unused_signal")
 signal on_measure(position)
 
 @onready var start_timer: Timer = $StartTimer
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	sec_per_beat = 60.0 / bpm
+	sec_per_beat = 60.0 / bpm / 4
 
 func _physics_process(delta: float) -> void:
 	if playing:
@@ -53,13 +52,13 @@ func closest_beat(nth):
 
 func play_from_beat(beat, offset):
 	play()
-	seek(beat * sec_per_beat)
+	seek(beat * 4 * sec_per_beat)
 	beats_before_start = offset
 	measure = beat % measures
 
 func _on_start_timer_timeout():
 	song_position_in_beats += 1
-	if song_position_in_beats < beats_before_start:
+	if song_position_in_beats < beats_before_start -1:
 		start_timer.start()
 	elif song_position_in_beats == beats_before_start - 1:
 		start_timer.wait_time = start_timer.wait_time - (AudioServer.get_time_to_next_mix() + AudioServer.get_output_latency())
