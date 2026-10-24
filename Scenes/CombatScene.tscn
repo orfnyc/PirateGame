@@ -10,21 +10,31 @@ script = ExtResource("1_2mqg5")
 [node name="ButtonsFolder" type="Node" parent="." unique_id=449216303]
 
 [node name="Bottom" type="Node2D" parent="ButtonsFolder" unique_id=902340771]
-position = Vector2(564, 488)
+position = Vector2(567, 488)
 
 [node name="Middle" type="Node2D" parent="ButtonsFolder" unique_id=1639243739]
 position = Vector2(562, 321)
 
 [node name="Left" type="Node2D" parent="ButtonsFolder" unique_id=1510809900]
-position = Vector2(748, 325)
+position = Vector2(380, 313)
 
 [node name="Top" type="Node2D" parent="ButtonsFolder" unique_id=453686710]
 position = Vector2(566, 164)
 
 [node name="Right" type="Node2D" parent="ButtonsFolder" unique_id=907951854]
-position = Vector2(379, 321)
+position = Vector2(744, 318)
 
 [node name="NotesFolder" type="Node" parent="." unique_id=1356039001]
+
+[node name="Bottom" type="Node" parent="NotesFolder" unique_id=1378264266]
+
+[node name="Middle" type="Node" parent="NotesFolder" unique_id=605381203]
+
+[node name="Left" type="Node" parent="NotesFolder" unique_id=820936566]
+
+[node name="Top" type="Node" parent="NotesFolder" unique_id=653751039]
+
+[node name="Right" type="Node" parent="NotesFolder" unique_id=619205015]
 
 [node name="Conductor" parent="." unique_id=697223448 instance=ExtResource("4_eel7g")]
 stream = ExtResource("3_sygbj")

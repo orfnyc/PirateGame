@@ -12,6 +12,22 @@ const NOTE = preload("uid://djord860u55gt")
 	5: $ButtonsFolder/Bottom
 }
 
+@onready var notes_folders: Dictionary[int, Node] = {
+	1: $NotesFolder/Middle,
+	2: $NotesFolder/Top,
+	3: $NotesFolder/Left,
+	4: $NotesFolder/Right,
+	5: $NotesFolder/Bottom
+}
+
+var inputs: Dictionary[int, String] = {
+	1: 'S',
+	2: 'W',
+	3: 'A',
+	4: 'D',
+	5: 'space'
+}
+
 var score: int = 0
 
 var notes_data: Dictionary[float, int] = {}
@@ -33,13 +49,19 @@ func load_text_file(file_path: String):
 func increment_score(val: int):
 	score += val
 
-func _on_conductor_beat(position: float) -> void:
-	position = position / 4 + 1
-	if notes_data.has(position):
+func _on_conductor_beat(pos: float) -> void:
+	pos = pos / 4 + 1
+	if notes_data.has(pos):
 		var new_note: Note = NOTE.instantiate()
-		new_note.init_note(buttons[notes_data[position]].position)
+		new_note.init_note(buttons[notes_data[pos]].position, inputs[notes_data[pos]])
 		new_note.connect("increment_score", increment_score)
-		notes_folder.add_child(new_note)
+		new_note.connect("clicked", evaluate_for_removal)
+		notes_folders[notes_data[pos]].add_child(new_note)
+
+func evaluate_for_removal(note: Note):
+	var others_at_position: Array[Node] = note.get_parent().get_children()
+	if note == others_at_position[0]:
+		note.queue_free()
 
 func _draw() -> void:
 	for i in range(1,6):
