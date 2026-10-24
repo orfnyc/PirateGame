@@ -8,6 +8,7 @@ var size: int = 10
 @export var input = ""
 
 signal increment_score(amount: int)
+signal clicked(note: Note)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -15,19 +16,20 @@ func _ready() -> void:
 
 func init_note(pos: Vector2) -> void:
 	position = pos
-	size = 120
-	modulate = Color("#ffffff00")
+	size = 40
+	modulate = Color("#ffffffff")
+	#modulate = Color("#ffffff00")
 	var tween: Tween = create_tween()
-	tween.tween_property(self, "size", 40, 1)
-	tween.parallel().tween_property(self, "modulate", Color("#FFFFFFFF"), 1)
-	tween.tween_property(self, "size", 0, 0.5)
+	#tween.tween_property(self, "size", 40, 1)
+	#tween.parallel().tween_property(self, "modulate", Color("#FFFFFFFF"), 1)
+	tween.tween_property(self, "size", 0, 0.2)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	if size <= 2:
 		increment_score.emit(-1)
-		print("total miss")
+		#print("total miss")
 		queue_free()
 	if size >= 35 and size <= 45:
 		status = "perfect"
@@ -55,7 +57,7 @@ func _unhandled_input(event):
 				else:
 					increment_score.emit(-1)
 					print(status)
-				queue_free()
+				clicked.emit(self)
 
 func _draw() -> void:
 	draw_circle(Vector2.ZERO, size, Color("FF1447"))
