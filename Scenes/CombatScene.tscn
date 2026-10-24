@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cdsl7fyqpk3t0"]
 
 [ext_resource type="Script" uid="uid://cacc63xt0y3lk" path="res://Scenes/CombatScene.gd" id="1_2mqg5"]
-[ext_resource type="AudioStream" uid="uid://m3cy288ucxeu" path="res://Assets/Songs/Drunken-Sailor-Test.mp3" id="3_sygbj"]
+[ext_resource type="AudioStream" uid="uid://bvbnyav2kpyhn" path="res://Assets/Songs/Leave-Her-Johnny.mp3" id="3_sygbj"]
 [ext_resource type="PackedScene" uid="uid://2g3a30yucngk" path="res://Scenes/Conductor.tscn" id="4_eel7g"]
 
 [node name="CombatScene" type="Node2D" unique_id=946611104]
@@ -10,19 +10,19 @@ script = ExtResource("1_2mqg5")
 [node name="ButtonsFolder" type="Node" parent="." unique_id=449216303]
 
 [node name="Bottom" type="Node2D" parent="ButtonsFolder" unique_id=902340771]
-position = Vector2(564, 488)
+position = Vector2(567, 488)
 
 [node name="Middle" type="Node2D" parent="ButtonsFolder" unique_id=1639243739]
 position = Vector2(562, 321)
 
 [node name="Left" type="Node2D" parent="ButtonsFolder" unique_id=1510809900]
-position = Vector2(748, 325)
+position = Vector2(380, 313)
 
 [node name="Top" type="Node2D" parent="ButtonsFolder" unique_id=453686710]
 position = Vector2(566, 164)
 
 [node name="Right" type="Node2D" parent="ButtonsFolder" unique_id=907951854]
-position = Vector2(379, 321)
+position = Vector2(744, 318)
 
 [node name="NotesFolder" type="Node" parent="." unique_id=1356039001]
 

@@ -20,6 +20,14 @@ const NOTE = preload("uid://djord860u55gt")
 	5: $NotesFolder/Bottom
 }
 
+var inputs: Dictionary[int, String] = {
+	1: 'S',
+	2: 'W',
+	3: 'A',
+	4: 'D',
+	5: 'space'
+}
+
 var score: int = 0
 
 var notes_data: Dictionary[float, int] = {}
@@ -27,7 +35,7 @@ var notes_data: Dictionary[float, int] = {}
 func _ready() -> void:
 	# generate song from clip graph
 	# collect notes from song into array
-	load_text_file("res://Assets/MapFiles/Drunken-Sailor-Test.txt")
+	load_text_file("res://Assets/MapFiles/Leave-Her-Johnny.txt")
 	conductor.play_with_beat_offset(2)
 
 func load_text_file(file_path: String):
@@ -42,10 +50,10 @@ func increment_score(val: int):
 	score += val
 
 func _on_conductor_beat(pos: float) -> void:
-	pos = pos / 4 + 0
+	pos = pos / 4 + 1
 	if notes_data.has(pos):
 		var new_note: Note = NOTE.instantiate()
-		new_note.init_note(buttons[notes_data[pos]].position)
+		new_note.init_note(buttons[notes_data[pos]].position, inputs[notes_data[pos]])
 		new_note.connect("increment_score", increment_score)
 		new_note.connect("clicked", evaluate_for_removal)
 		notes_folders[notes_data[pos]].add_child(new_note)
