@@ -1,6 +1,7 @@
 extends Node2D
 
 const NOTE = preload("uid://djord860u55gt")
+@onready var test: AudioStreamPlayer = $Test
 
 @onready var notes_folder: Node = $NotesFolder
 @onready var conductor: AudioStreamPlayer = $Conductor
@@ -36,11 +37,18 @@ func _ready() -> void:
 	# generate song from clip graph
 	# collect notes from song into array
 	load_text_file("res://Assets/MapFiles/Leave-Her-Johnny.txt")
-	conductor.play_with_beat_offset(0)
+	build_playlist()
+	conductor.play()
+	#conductor.play_with_beat_offset(0)
 
-#func build_playlist() -> void:
-	#var playlist: AudioStreamPlaylist = 
-	#pass
+func build_playlist() -> void:
+	var playlist := AudioStreamPlaylist.new()
+	playlist.stream_count = 2
+	playlist.fade_time = 0.3
+	playlist.loop = false
+	playlist.set_list_stream(0, SongLinksGraph.SONGS["Drunken-Sailor"].mp3)
+	playlist.set_list_stream(1, SongLinksGraph.SONGS["Leave-Her"].mp3)
+	conductor.stream = playlist
 
 func load_text_file(file_path: String):
 	if not FileAccess.file_exists(file_path):

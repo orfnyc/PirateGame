@@ -40,4 +40,6 @@ position = Vector2(648, 232)
 stream = ExtResource("3_sygbj")
 bpm = 90
 
+[node name="Test" type="AudioStreamPlayer" parent="." unique_id=706613219]
+
 [connection signal="on_beat" from="Conductor" to="." method="_on_conductor_beat"]
