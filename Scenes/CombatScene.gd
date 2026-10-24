@@ -19,7 +19,7 @@ var notes_data: Dictionary[float, int] = {}
 func _ready() -> void:
 	# generate song from clip graph
 	# collect notes from song into array
-	load_text_file("res://Assets/MapFiles/Drunken-Sailor-Test.txt")
+	load_text_file("res://Assets/MapFiles/Leave-Her-Johnny.txt")
 	conductor.play_with_beat_offset(2)
 
 func load_text_file(file_path: String):
