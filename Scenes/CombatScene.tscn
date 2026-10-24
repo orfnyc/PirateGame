@@ -10,19 +10,19 @@ script = ExtResource("1_2mqg5")
 [node name="ButtonsFolder" type="Node" parent="." unique_id=449216303]
 
 [node name="Bottom" type="Node2D" parent="ButtonsFolder" unique_id=902340771]
-position = Vector2(567, 488)
+position = Vector2(568, 488)
 
 [node name="Middle" type="Node2D" parent="ButtonsFolder" unique_id=1639243739]
-position = Vector2(562, 321)
+position = Vector2(491, 239)
 
 [node name="Left" type="Node2D" parent="ButtonsFolder" unique_id=1510809900]
-position = Vector2(380, 313)
+position = Vector2(338, 313)
 
 [node name="Top" type="Node2D" parent="ButtonsFolder" unique_id=453686710]
-position = Vector2(566, 164)
+position = Vector2(803, 296)
 
 [node name="Right" type="Node2D" parent="ButtonsFolder" unique_id=907951854]
-position = Vector2(744, 318)
+position = Vector2(648, 232)
 
 [node name="NotesFolder" type="Node" parent="." unique_id=1356039001]
 

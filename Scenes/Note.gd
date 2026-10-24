@@ -6,7 +6,6 @@ var current_note = null
 var size: int = 10
 var input = ""
 
-signal increment_score(amount: int)
 signal clicked(note: Note)
 
 # Called when the node enters the scene tree for the first time.
@@ -15,7 +14,7 @@ func _ready() -> void:
 
 func init_note(pos: Vector2, inp: String) -> void:
 	position = pos
-	size = 100
+	size = 140
 	input = inp
 	modulate = Color("#ffffff00")
 	var tween: Tween = create_tween()
@@ -27,8 +26,7 @@ func init_note(pos: Vector2, inp: String) -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	if size <= 2:
-		increment_score.emit(-1)
-		print("total miss")
+		#print("total miss")
 		queue_free()
 	if size >= 35 and size <= 45:
 		status = "perfect"
@@ -42,35 +40,7 @@ func _process(_delta: float) -> void:
 
 func _unhandled_input(event):
 	if Input.is_action_just_pressed(input):
-		if status == "perfect":
-			increment_score.emit(3)
-			print(status)
-		elif status == "good":
-			increment_score.emit(2)
-			print(status)
-		elif status == "okay":
-			increment_score.emit(1)
-			print(status)
-		else:
-			increment_score.emit(-1)
-			print(status)
-		clicked.emit(self)
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
-			if (position.distance_to(get_global_mouse_position()) <= 40):
-				if status == "perfect":
-					increment_score.emit(3)
-					print(status)
-				elif status == "good":
-					increment_score.emit(2)
-					print(status)
-				elif status == "okay":
-					increment_score.emit(1)
-					print(status)
-				else:
-					increment_score.emit(-1)
-					print(status)
-				clicked.emit(self)
+		clicked.emit(self, status)
 
 func _draw() -> void:
 	draw_circle(Vector2.ZERO, size, Color("FF1447"))

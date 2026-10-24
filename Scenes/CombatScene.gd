@@ -36,7 +36,11 @@ func _ready() -> void:
 	# generate song from clip graph
 	# collect notes from song into array
 	load_text_file("res://Assets/MapFiles/Leave-Her-Johnny.txt")
-	conductor.play_with_beat_offset(2)
+	conductor.play_with_beat_offset(0)
+
+#func build_playlist() -> void:
+	#var playlist: AudioStreamPlaylist = 
+	#pass
 
 func load_text_file(file_path: String):
 	if not FileAccess.file_exists(file_path):
@@ -54,13 +58,13 @@ func _on_conductor_beat(pos: float) -> void:
 	if notes_data.has(pos):
 		var new_note: Note = NOTE.instantiate()
 		new_note.init_note(buttons[notes_data[pos]].position, inputs[notes_data[pos]])
-		new_note.connect("increment_score", increment_score)
 		new_note.connect("clicked", evaluate_for_removal)
 		notes_folders[notes_data[pos]].add_child(new_note)
 
-func evaluate_for_removal(note: Note):
+func evaluate_for_removal(note: Note, status: String):
 	var others_at_position: Array[Node] = note.get_parent().get_children()
 	if note == others_at_position[0]:
+		print(status)
 		note.queue_free()
 
 func _draw() -> void:
