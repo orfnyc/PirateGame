@@ -1,7 +1,6 @@
 extends Node2D
 
 const NOTE = preload("uid://djord860u55gt")
-@onready var test: AudioStreamPlayer = $Test
 
 @onready var notes_folder: Node = $NotesFolder
 @onready var conductor: AudioStreamPlayer = $Conductor
@@ -20,6 +19,7 @@ const NOTE = preload("uid://djord860u55gt")
 	3: $NotesFolder/Right,
 	5: $NotesFolder/Bottom
 }
+@onready var ui: Control = $UI
 
 var inputs: Dictionary[int, String] = {
 	1: 'A',
@@ -33,6 +33,8 @@ var score: int = 0
 var playlist_array: Array[AudioStreamMP3] = []
 var playlist_index: int = 0
 var notes_data: Dictionary[float, int] = {}
+
+var combo: int = 0
 
 func _ready() -> void:
 	# generate song from clip graph
@@ -55,15 +57,6 @@ func build_playlist() -> void:
 			notes_data[key + beats_count] = songs_array[i].map[key]
 		beats_count += songs_array[i].num_beats
 	conductor.stream = playlist
-	
-
-#func load_text_file(file_path: String):
-	#if not FileAccess.file_exists(file_path):
-		#return
-	#var file = FileAccess.open(file_path, FileAccess.READ)
-	#while file.get_position() < file.get_length():
-		#var line = file.get_line().split(" ")
-		#notes_data[float(line[0])] = int(line[1])
 
 func increment_score(val: int):
 	score += val
@@ -76,12 +69,40 @@ func _on_conductor_beat(pos: float) -> void:
 		new_note.connect("clicked", evaluate_for_removal)
 		notes_folders[notes_data[pos]].add_child(new_note)
 
-func evaluate_for_removal(note: Note, status: String):
+func evaluate_for_removal(note: Note, status: String, early: bool):
 	var others_at_position: Array[Node] = note.get_parent().get_children()
 	if note == others_at_position[0]:
-		print(status)
+		var delta_score = 0
+		if status == "total miss":
+			delta_score = -2
+		elif status == "miss":
+			delta_score = -1
+		elif status == "okay":
+			delta_score = 1
+		elif status == "good":
+			delta_score = 2
+		elif status == "perfect":
+			delta_score = 3
+		elif status == "true perfect":
+			delta_score = 5
+		if delta_score >= 2:
+			combo += 1
+		else:
+			combo = 0
+		if combo >= 32:
+			delta_score *= 8
+		elif combo >= 8:
+			delta_score *= 4
+		elif combo >= 2:
+			delta_score *= 2
+		score += delta_score
+		if status == "true perfect":
+			print("true perfect!")
+		else:
+			print(("Early" if early else "Late") + " " + status)
+		ui.update_score(score)
 		note.queue_free()
 
 func _draw() -> void:
 	for i in range(1,6):
-		draw_arc(buttons[i].position, 40, 0, TAU, 100, Color.WHITE)
+		draw_arc(buttons[i].position, 20, 0, TAU, 100, Color.WHITE)

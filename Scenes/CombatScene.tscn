@@ -1,28 +1,37 @@
 [gd_scene format=3 uid="uid://cdsl7fyqpk3t0"]
 
 [ext_resource type="Script" uid="uid://cacc63xt0y3lk" path="res://Scenes/CombatScene.gd" id="1_2mqg5"]
+[ext_resource type="Texture2D" uid="uid://do8koea4cvrki" path="res://Assets/Art/cap_fullbody_neutral.png" id="2_memue"]
 [ext_resource type="AudioStream" uid="uid://o8ijkenfua1s" path="res://Assets/Songs/Connector-1.mp3" id="3_sygbj"]
 [ext_resource type="PackedScene" uid="uid://2g3a30yucngk" path="res://Scenes/Conductor.tscn" id="4_eel7g"]
+[ext_resource type="PackedScene" uid="uid://5oyud0wysm0k" path="res://Scenes/Ui.tscn" id="4_memue"]
 
 [node name="CombatScene" type="Node2D" unique_id=946611104]
 script = ExtResource("1_2mqg5")
 
+[node name="Sprites" type="CanvasLayer" parent="." unique_id=1622869797]
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprites" unique_id=674745987]
+position = Vector2(137, 167)
+texture = ExtResource("2_memue")
+
 [node name="ButtonsFolder" type="Node" parent="." unique_id=449216303]
 
 [node name="Bottom" type="Node2D" parent="ButtonsFolder" unique_id=902340771]
-position = Vector2(568, 488)
+position = Vector2(138, 285)
+scale = Vector2(0.58680046, -0.08218695)
 
 [node name="Middle" type="Node2D" parent="ButtonsFolder" unique_id=1639243739]
-position = Vector2(491, 239)
+position = Vector2(94, 49)
 
 [node name="Left" type="Node2D" parent="ButtonsFolder" unique_id=1510809900]
-position = Vector2(338, 313)
+position = Vector2(44, 101)
 
 [node name="Top" type="Node2D" parent="ButtonsFolder" unique_id=453686710]
-position = Vector2(803, 296)
+position = Vector2(220, 100)
 
 [node name="Right" type="Node2D" parent="ButtonsFolder" unique_id=907951854]
-position = Vector2(648, 232)
+position = Vector2(172, 48)
 
 [node name="NotesFolder" type="Node" parent="." unique_id=1356039001]
 
@@ -40,6 +49,6 @@ position = Vector2(648, 232)
 stream = ExtResource("3_sygbj")
 bpm = 90
 
-[node name="Test" type="AudioStreamPlayer" parent="." unique_id=706613219]
+[node name="UI" parent="." unique_id=1634290381 instance=ExtResource("4_memue")]
 
 [connection signal="on_beat" from="Conductor" to="." method="_on_conductor_beat"]
