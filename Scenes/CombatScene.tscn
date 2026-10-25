@@ -5,6 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://o8ijkenfua1s" path="res://Assets/Songs/Connector-1.mp3" id="3_sygbj"]
 [ext_resource type="PackedScene" uid="uid://2g3a30yucngk" path="res://Scenes/Conductor.tscn" id="4_eel7g"]
 [ext_resource type="PackedScene" uid="uid://5oyud0wysm0k" path="res://Scenes/Ui.tscn" id="4_memue"]
+[ext_resource type="Texture2D" uid="uid://bsfje0d5erbwf" path="res://Assets/Art/background_fight_ship.png" id="6_2p17o"]
 
 [node name="CombatScene" type="Node2D" unique_id=946611104]
 script = ExtResource("1_2mqg5")
@@ -49,5 +50,11 @@ position = Vector2(172, 48)
 [node name="Conductor" parent="." unique_id=697223448 instance=ExtResource("4_eel7g")]
 stream = ExtResource("3_sygbj")
 bpm = 90
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1999725300]
+z_index = -100
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("6_2p17o")
 
 [connection signal="on_beat" from="Conductor" to="." method="_on_conductor_beat"]
