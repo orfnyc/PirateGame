@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://djord860u55gt"]
 
 [ext_resource type="Script" uid="uid://iab553db5d0a" path="res://Scenes/Note.gd" id="1_1eugu"]
-[ext_resource type="Texture2D" uid="uid://csg3832hi5les" path="res://Assets/Art/prop_gear_bronze.png" id="2_picia"]
+[ext_resource type="Texture2D" uid="uid://y1ke0qmeflfl" path="res://Assets/Art/prop_gear_bronze_41_v2.png" id="2_picia"]
 
 [node name="Note" type="Node2D" unique_id=904582845]
 modulate = Color(1, 1, 1, 0)

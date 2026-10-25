@@ -18,7 +18,7 @@ func init_note(pos: Vector2, inp: String) -> void:
 	modulate = Color("#ffffff00")
 	var tween: Tween = create_tween()
 	tween.set_ease(Tween.EASE_IN)
-	tween.tween_property(self, "size", 20, 1)
+	tween.parallel().tween_property(self, "size", 20, 1)
 	tween.parallel().tween_property(self, "modulate", Color("#FFFFFFFF"), 1)
 	tween.tween_property(self, "size", 0, 0.5)
 
@@ -31,16 +31,16 @@ func _unhandled_input(_event):
 	var status: String = ""
 	var early: bool = false
 	if Input.is_action_just_pressed(input):
-		if size >= 32: 
+		if size >= 33: 
 			status = "miss"
 			early = true
-		elif size >= 27:
+		elif size >= 28:
 			status = "okay"
 			early = true
-		elif size >= 23:
+		elif size >= 24:
 			status = "good"
 			early = true
-		elif size >= 21:
+		elif size >= 22:
 			status = "perfect"
 			early = true
 		elif size >= 19:
