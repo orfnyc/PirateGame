@@ -45,7 +45,8 @@ func _ready() -> void:
 
 func build_playlist() -> void:
 	var songs_array: Array[MapMp3Pair] = [SongLinksGraph.SONGS["Drunken-Sailor"],
-											SongLinksGraph.SONGS["Leave-Her"]]
+											SongLinksGraph.SONGS["Leave-Her"],
+											SongLinksGraph.SONGS["Connector-1"]]
 	var playlist := AudioStreamPlaylist.new()
 	playlist.stream_count = songs_array.size()
 	playlist.fade_time = 0
