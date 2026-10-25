@@ -9,9 +9,10 @@
 [node name="CombatScene" type="Node2D" unique_id=946611104]
 script = ExtResource("1_2mqg5")
 
-[node name="Sprites" type="CanvasLayer" parent="." unique_id=1622869797]
+[node name="UI" parent="." unique_id=1634290381 instance=ExtResource("4_memue")]
+z_index = 100
 
-[node name="Sprite2D" type="Sprite2D" parent="Sprites" unique_id=674745987]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=674745987]
 position = Vector2(137, 167)
 texture = ExtResource("2_memue")
 
@@ -48,7 +49,5 @@ position = Vector2(172, 48)
 [node name="Conductor" parent="." unique_id=697223448 instance=ExtResource("4_eel7g")]
 stream = ExtResource("3_sygbj")
 bpm = 90
-
-[node name="UI" parent="." unique_id=1634290381 instance=ExtResource("4_memue")]
 
 [connection signal="on_beat" from="Conductor" to="." method="_on_conductor_beat"]

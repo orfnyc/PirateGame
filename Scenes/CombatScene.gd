@@ -44,7 +44,8 @@ func _ready() -> void:
 
 
 func build_playlist() -> void:
-	var songs_array: Array[MapMp3Pair] = [SongLinksGraph.SONGS["Drunken-Sailor"],
+	var songs_array: Array[MapMp3Pair] = [SongLinksGraph.SONGS["Running-Cuba"],
+											SongLinksGraph.SONGS["Drunken-Sailor"],
 											SongLinksGraph.SONGS["Leave-Her"],
 											SongLinksGraph.SONGS["Connector-1"]]
 	var playlist := AudioStreamPlaylist.new()
@@ -98,10 +99,16 @@ func evaluate_for_removal(note: Note, status: String, early: bool):
 			delta_score *= 2
 		score += delta_score
 		if status == "true perfect":
+			ui.show_feedback("true perfect!")
 			print("true perfect!")
+		elif status == "total miss":
+			ui.show_feedback("total miss")
+			print("total miss")
 		else:
+			ui.show_feedback(("Early" if early else "Late") + " " + status)
 			print(("Early" if early else "Late") + " " + status)
 		ui.update_score(score)
+		
 		note.queue_free()
 
 func _draw() -> void:

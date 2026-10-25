@@ -18,7 +18,7 @@ func init_note(pos: Vector2, inp: String) -> void:
 	modulate = Color("#ffffff00")
 	var tween: Tween = create_tween()
 	tween.set_ease(Tween.EASE_IN)
-	tween.parallel().tween_property(self, "size", 20, 1)
+	tween.tween_property(self, "size", 20, 1)
 	tween.parallel().tween_property(self, "modulate", Color("#FFFFFFFF"), 1)
 	tween.tween_property(self, "size", 0, 0.5)
 
