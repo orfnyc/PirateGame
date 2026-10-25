@@ -24,7 +24,7 @@ func init_note(pos: Vector2, inp: String) -> void:
 
 func _process(delta) -> void:
 	if size <= 2:
-		clicked.emit(self, "total miss", false)
+		clicked.emit(self, "Fail", false)
 	queue_redraw()
 
 func _unhandled_input(_event):
@@ -32,30 +32,30 @@ func _unhandled_input(_event):
 	var early: bool = false
 	if Input.is_action_just_pressed(input):
 		if size >= 33: 
-			status = "miss"
+			status = "Miss"
 			early = true
 		elif size >= 28:
-			status = "okay"
+			status = "Okay"
 			early = true
 		elif size >= 24:
-			status = "good"
+			status = "Good"
 			early = true
 		elif size >= 22:
-			status = "perfect"
+			status = "Perfect"
 			early = true
 		elif size >= 19:
-			status = "true perfect"
+			status = "Perfect!!"
 		elif size >= 17:
-			status = "perfect"
+			status = "Perfect"
 		elif size >= 12:
-			status = "good"
+			status = "Good"
 		elif size >= 7:
-			status = "okay"
+			status = "Okay"
 		elif size >= 2:
-			status = "miss"
+			status = "Miss"
 		else: 
-			status = "total miss"
+			status = "Fail"
 		clicked.emit(self, status, early)
 
 func _draw() -> void:
-	draw_circle(Vector2.ZERO, size, Color("FF1447"))
+	draw_circle(Vector2.ZERO, size, Color("f27633ff"))

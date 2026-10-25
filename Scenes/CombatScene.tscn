@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cacc63xt0y3lk" path="res://Scenes/CombatScene.gd" id="1_2mqg5"]
 [ext_resource type="Texture2D" uid="uid://do8koea4cvrki" path="res://Assets/Art/cap_fullbody_neutral.png" id="2_memue"]
 [ext_resource type="AudioStream" uid="uid://o8ijkenfua1s" path="res://Assets/Songs/Connector-1.mp3" id="3_sygbj"]
+[ext_resource type="Texture2D" uid="uid://dywtl1opwdl0j" path="res://Assets/Art/prop_gear_bronze_FINAL.png" id="4_6puio"]
 [ext_resource type="PackedScene" uid="uid://2g3a30yucngk" path="res://Scenes/Conductor.tscn" id="4_eel7g"]
 [ext_resource type="PackedScene" uid="uid://5oyud0wysm0k" path="res://Scenes/Ui.tscn" id="4_memue"]
 [ext_resource type="Texture2D" uid="uid://bsfje0d5erbwf" path="res://Assets/Art/background_fight_ship.png" id="6_2p17o"]
@@ -12,28 +13,37 @@ script = ExtResource("1_2mqg5")
 
 [node name="UI" parent="." unique_id=1634290381 instance=ExtResource("4_memue")]
 z_index = 100
+size_flags_horizontal = 6
+size_flags_vertical = 6
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=674745987]
-position = Vector2(137, 167)
+position = Vector2(299.28082, 165.32816)
+scale = Vector2(1.3, 1.3)
 texture = ExtResource("2_memue")
 
 [node name="ButtonsFolder" type="Node" parent="." unique_id=449216303]
 
-[node name="Bottom" type="Node2D" parent="ButtonsFolder" unique_id=902340771]
-position = Vector2(138, 285)
-scale = Vector2(0.58680046, -0.08218695)
+[node name="Bottom" type="Sprite2D" parent="ButtonsFolder" unique_id=1940376023]
+position = Vector2(300.28082, 294.32816)
+texture = ExtResource("4_6puio")
 
-[node name="Middle" type="Node2D" parent="ButtonsFolder" unique_id=1639243739]
-position = Vector2(94, 49)
+[node name="Middle" type="Sprite2D" parent="ButtonsFolder" unique_id=125112059]
+position = Vector2(253.28082, 51.32815)
+texture = ExtResource("4_6puio")
 
-[node name="Left" type="Node2D" parent="ButtonsFolder" unique_id=1510809900]
-position = Vector2(44, 101)
+[node name="Left" type="Sprite2D" parent="ButtonsFolder" unique_id=495384530]
+position = Vector2(195.28082, 109.328156)
+rotation = 0.39095375
+texture = ExtResource("4_6puio")
 
-[node name="Top" type="Node2D" parent="ButtonsFolder" unique_id=453686710]
-position = Vector2(220, 100)
+[node name="Top" type="Sprite2D" parent="ButtonsFolder" unique_id=296429368]
+position = Vector2(396.28082, 109.328156)
+texture = ExtResource("4_6puio")
 
-[node name="Right" type="Node2D" parent="ButtonsFolder" unique_id=907951854]
-position = Vector2(172, 48)
+[node name="Right" type="Sprite2D" parent="ButtonsFolder" unique_id=1648537756]
+position = Vector2(336.28082, 51.328148)
+rotation = 0.3926991
+texture = ExtResource("4_6puio")
 
 [node name="NotesFolder" type="Node" parent="." unique_id=1356039001]
 
@@ -53,8 +63,13 @@ bpm = 90
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1999725300]
 z_index = -100
-offset_right = 40.0
-offset_bottom = 40.0
+offset_top = -54.0
+offset_right = 512.0
+offset_bottom = 330.0
+scale = Vector2(1.160002, 1)
+size_flags_horizontal = 3
+size_flags_vertical = 3
 texture = ExtResource("6_2p17o")
+metadata/_edit_use_anchors_ = true
 
 [connection signal="on_beat" from="Conductor" to="." method="_on_conductor_beat"]

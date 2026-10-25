@@ -75,17 +75,17 @@ func evaluate_for_removal(note: Note, status: String, early: bool):
 	var others_at_position: Array[Node] = note.get_parent().get_children()
 	if note == others_at_position[0]:
 		var delta_score = 0
-		if status == "total miss":
+		if status == "Fail":
 			delta_score = -2
-		elif status == "miss":
+		elif status == "Miss":
 			delta_score = -1
-		elif status == "okay":
+		elif status == "Okay":
 			delta_score = 1
-		elif status == "good":
+		elif status == "Good":
 			delta_score = 2
-		elif status == "perfect":
+		elif status == "Perfect":
 			delta_score = 3
-		elif status == "true perfect":
+		elif status == "Perfect!!":
 			delta_score = 5
 		if delta_score >= 2:
 			combo += 1
@@ -98,19 +98,11 @@ func evaluate_for_removal(note: Note, status: String, early: bool):
 		elif combo >= 2:
 			delta_score *= 2
 		score += delta_score
-		if status == "true perfect":
-			ui.show_feedback("true perfect!")
-			print("true perfect!")
-		elif status == "total miss":
-			ui.show_feedback("total miss")
-			print("total miss")
+		if status == "Perfect!!":
+			ui.show_feedback(status)
+		elif status == "Fail":
+			ui.show_feedback(status)
 		else:
 			ui.show_feedback(("Early" if early else "Late") + " " + status)
-			print(("Early" if early else "Late") + " " + status)
 		ui.update_score(score)
-		
 		note.queue_free()
-
-func _draw() -> void:
-	for i in range(1,6):
-		draw_arc(buttons[i].position, 20, 0, TAU, 100, Color.WHITE)
